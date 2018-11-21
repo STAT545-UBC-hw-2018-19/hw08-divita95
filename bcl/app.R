@@ -21,22 +21,39 @@ bcl <- read.csv("bcl-data.csv", stringsAsFactors = FALSE)
 ui <- fluidPage(
     titlePanel("BC Liquor price app", 
                windowTitle = "BCL app"),
+               
+    
     sidebarLayout(
         sidebarPanel(
-            sliderInput("priceInput", "Select your desired price range.",
+            
+            #task1: including a image and some widgets
+            
+            img(src = "picture.jpg", height = 50, width = 100), # adding immage
+            
+            sliderInput("priceInput", "Select your desired price range.", #adding slider input
                   min = 0, max = 100, value = c(15, 30), pre="$"),
+            
             radioButtons("typeInput", "Select your desired beverage type",
-                         choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"),
+                         choices = c("BEER", "REFRESHMENT", "SPIRITS", "WINE"), #adding radio buttons
                          selected = "WINE"),
-            #task1
-            checkboxInput("sortInput", "Sort by Price", FALSE),
-            #task2
+            
+            selectInput("countryInput", "Country",
+                        choices = c("CANADA", "NEW ZEALAND", "AUSTRALIA")), # adding selection box
+            
+            
+            checkboxInput("sortInput", "Sort by Price", FALSE), #adding checkbox
+            
+            #task2: include colorinput effects for the plot
+            
             colourInput("colour", "Select the desired colour", "purple")
         ),
         mainPanel(
             plotOutput("price_hist"),
-            #task3
-            dataTableOutput("price_table"),
+            
+            #task3: Explore DT package
+            
+            dataTableOutput("price_table"), 
+                
             verbatimTextOutput("sort_price")
         )
     )
@@ -53,7 +70,8 @@ server <- function(input, output) {
         bcl %>% 
         filter( Price < input$priceInput[2],
                 Price > input$priceInput[1],
-                Type == input$typeInput)
+                Type == input$typeInput,
+                Country == input$countryInput)
     })
     output$price_hist <- renderPlot({
         bcl_filtered() %>% 
@@ -62,11 +80,15 @@ server <- function(input, output) {
         })
     
     output$price_table <- renderDataTable({
-        bcl_filtered()   
-        }) #task3
+        
+        bcl_filtered()  
+        
+  }) #task3
     
-    output$sort_price <- renderTable({
-        #bcl_filtered() 
+    output$sort_price <- renderDataTable({
+       
+       bcl_filtered()
+        
     }) #task1
    
 } # curly brackets can be used with render function to run multiple lines of code.

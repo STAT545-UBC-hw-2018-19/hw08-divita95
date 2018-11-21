@@ -9,8 +9,8 @@ The objective of the homework was to work on the BC Liqour shiny app developed u
 
 #### Features of the Shiny App developed
 
-**Task1:** Add an option to sort the results table by price.
-In this task, the `checkboxinput()` widget was used to create a check box so that the table can be sorted according to price. Check the app (*link provided above*) to see the code for developing this widget.
+**Task1:** Add widgets.
+In this task, the `selectinput()` widget was used to create a selection box so that the table can be sorted according to country. Check the app (*link provided above*) to see the code for developing this widget. Other widgets including `checkboxinput()`, `radiobuttons()` and `sliderinput()` were also explored.
 
 **Task2:** Use the DT package to turn the current results table into an interactive table.
 In this task,  DT package was installed firstly into Rstudio. The following code can be used:
@@ -31,4 +31,4 @@ library(colourpicker)
  
 
 #### Link to the website where the app was hosted
-You can get the shiny app online [here]()
+You can get the shiny app online [here](https://stat547-hw08.shinyapps.io/shinyapp/) and the application was uploaded [here](https://www.shinyapps.io/admin/#/dashboard)
